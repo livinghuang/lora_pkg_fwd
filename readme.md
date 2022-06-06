@@ -1,6 +1,6 @@
 # Set The Siliq Lora Package Forwarder
 
-This package forwoarder fork from RAK <https://github.com/RAKWireless/rak_common_for_gateway>, but add install.go to finish some setting
+This package forwoarder fork from RAK <https://github.com/RAKWireless/rak_common_for_gateway>, but add install.go to finish some setting. It already tested by Raspberry Pi3+ A.
 
 ## install
 
