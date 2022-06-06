@@ -52,9 +52,9 @@ func main() {
 		if err := os.Mkdir(dst_opt, os.ModePerm); err != nil {
 			log.Fatal(err)
 		}
-		log.Println("Target folder " + info.Name() + " folder created")
+		log.Println("Target folder created", info)
 	} else {
-		log.Println("Target folder " + info.Name() + " exist")
+		log.Println("Target exist", info)
 	}
 
 	info1, err := os.Stat(dst_service)
@@ -63,9 +63,9 @@ func main() {
 		if err := os.Mkdir(dst_service, os.ModePerm); err != nil {
 			log.Fatal(err)
 		}
-		log.Println("Target folder " + info1.Name() + " folder created")
+		log.Println("Target folder created", info1)
 	} else {
-		log.Println("Target folder " + info1.Name() + " exist")
+		log.Println("Target folder exist", info1)
 	}
 	copyFile(src_g, dst_opt, 0666)
 	copyFile(src_l, dst_opt, 0666)

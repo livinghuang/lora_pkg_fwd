@@ -12,6 +12,7 @@ This package forwoarder fork from RAK <https://github.com/RAKWireless/rak_common
 
 ```bash
 mkdir lora
+cd lora
 git clone https://github.com/livinghuang/lora_pkg_fwd.git
 cd lora_pkg_fwd/
 go build install.go
