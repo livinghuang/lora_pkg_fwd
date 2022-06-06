@@ -11,11 +11,14 @@ This package forwoarder fork from RAK <https://github.com/RAKWireless/rak_common
 5. set up the parameter
 
 ```bash
+mkdir lora
 git clone https://github.com/livinghuang/lora_pkg_fwd.git
-chmod 755 install
-./install
+cd lora_pkg_fwd/
+go build install.go
+sudo chmod 755 install
+sudo ./install
 ./set_eui.sh
-systemctl start lora_pkt_fwd.service
-system enable lora_pkt_fwd.service
-nano /opt/siliq/global_conf.json
+sudo systemctl start lora_pkt_fwd.service
+sudo systemctl enable lora_pkt_fwd.service
+sudo nano /opt/siliq/global_conf.json
 ```

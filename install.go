@@ -41,6 +41,9 @@ func main() {
 	src_g := "global_conf.json"
 	src_l := "local_conf.json"
 	src_lpf := "lora_pkt_fwd"
+	src_rls := "reset_lgw.sh"
+	src_ses := "set_eui.sh"
+	src_ss := "start.sh"
 	dst_opt := "/opt/siliq/"
 	dst_service := "/etc/systemd/system/"
 	info, err := os.Stat(dst_opt)
@@ -67,5 +70,8 @@ func main() {
 	copyFile(src_g, dst_opt, 0666)
 	copyFile(src_l, dst_opt, 0666)
 	copyFile(src_lpf, dst_opt, 0755)
+	copyFile(src_rls, dst_opt, 0755)
+	copyFile(src_ses, dst_opt, 0755)
+	copyFile(src_ss, dst_opt, 0755)
 	copyFile(src_lpf+".service", dst_service, 0755)
 }
