@@ -1,42 +1,71 @@
 package main
 
 import (
-    "io"
-    "log"
-    "os"
+	"fmt"
+	"io/fs"
+	"io/ioutil"
+	"log"
+	"os"
 )
+
+func copyFile(src string, dstFolder string, perm fs.FileMode) error {
+
+	targetFileName := dstFolder + src
+	//check target file exist , if exist , remove
+	info, err := os.Stat(targetFileName)
+	if os.IsExist(err) {
+		log.Fatal("File exist.")
+		e := os.Remove(targetFileName)
+		if e != nil {
+			log.Fatal(e)
+		}
+	} else {
+		log.Println(info.Name() + " file created")
+	}
+
+	input, err := ioutil.ReadFile(src)
+	if err != nil {
+		fmt.Println(err)
+	}
+	err = ioutil.WriteFile(targetFileName, input, perm)
+	if err != nil {
+		fmt.Println("Error creating", dstFolder+src)
+		fmt.Println(err)
+	}
+	return err
+
+}
 
 func main() {
 
-    src_g := "global_conf.json"
-    dst_folder := "/opt/siliq/"
-
-
-    info,err := os.Stat("/opt/siliq")
-    if os.IsNotExist(err) {
-//        log.Fatal("File does not exist.")
-        if err := os.Mkdir("/opt/siliq", os.ModePerm); err != nil {
-          log.Fatal(err)
+	src_g := "global_conf.json"
+	src_l := "local_conf.json"
+	src_lpf := "lora_pkt_fwd"
+	dst_opt := "/opt/siliq/"
+	dst_service := "/etc/systemd/system/"
+	info, err := os.Stat(dst_opt)
+	if os.IsNotExist(err) {
+		log.Println("Target folder does not exist.")
+		if err := os.Mkdir(dst_opt, os.ModePerm); err != nil {
+			log.Fatal(err)
+		}
+		log.Println("Target folder " + info.Name() + " folder created")
+	} else {
+		log.Println("Target folder " + info.Name() + " exist")
 	}
-    }
-    log.Println(info)
 
-
-    fin, err := os.Open(src_g)
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer fin.Close()
-
-    fout, err := os.Create(dst_folder+src_g)
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer fout.Close()
-
-    _, err = io.Copy(fout, fin)
-
-    if err != nil {
-        log.Fatal(err)
-    }
+	info1, err := os.Stat(dst_service)
+	if os.IsNotExist(err) {
+		log.Println("Target folder does not exist.")
+		if err := os.Mkdir(dst_service, os.ModePerm); err != nil {
+			log.Fatal(err)
+		}
+		log.Println("Target folder " + info1.Name() + " folder created")
+	} else {
+		log.Println("Target folder " + info1.Name() + " exist")
+	}
+	copyFile(src_g, dst_opt, 0666)
+	copyFile(src_l, dst_opt, 0666)
+	copyFile(src_lpf, dst_opt, 0755)
+	copyFile(src_lpf+".service", dst_service, 0755)
 }
