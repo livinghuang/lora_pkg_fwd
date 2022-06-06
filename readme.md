@@ -17,7 +17,6 @@ cd lora_pkg_fwd/
 go build install.go
 sudo chmod 755 install
 sudo ./install
-./set_eui.sh
 sudo systemctl start lora_pkt_fwd.service
 sudo systemctl enable lora_pkt_fwd.service
 sudo nano /opt/siliq/global_conf.json
