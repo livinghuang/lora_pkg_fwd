@@ -6,9 +6,8 @@ This package forwoarder fork from RAK <https://github.com/RAKWireless/rak_common
 
 1. clone this Repository from github
 2. execute install
-3. execute start.sh to have the local_conf.json
-4. enable lora_pkt_fwd service
-5. set up the parameter
+3. enable lora_pkt_fwd service
+4. set up the parameter
 
 ```bash
 mkdir lora
