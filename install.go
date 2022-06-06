@@ -20,7 +20,7 @@ func copyFile(src string, dstFolder string, perm fs.FileMode) error {
 			log.Fatal(e)
 		}
 	} else {
-		log.Println(info.Name() + " file created")
+		log.Println("file created", info)
 	}
 
 	input, err := ioutil.ReadFile(src)
